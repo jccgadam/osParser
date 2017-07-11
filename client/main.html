@@ -1,0 +1,31 @@
+<head>
+  <title>osParser</title>
+</head>
+
+<body>
+  {{> hello}}
+  {{> upload}}
+</body>
+
+<template name="hello">
+  <div class='row'>
+    <div class="page-header col-lg-6">
+      <h2 style="margin:15px">Subscription Order Parser</h2>
+    </div>
+  </div>
+</template>
+
+<template name="upload">
+ <div class='row'>
+   <div class='col-lg-1'>
+     <div style="display:none">{{orderData.length}}</div>
+   </div>
+   <div class='col-lg-4'>
+     <span>Select And Upload your Sales Order!</span>
+     <br>
+     "Please name your download file"
+     <input required id='fileName'/>
+     <input type='file' id='uploadFile' disabled/>
+   </div>
+ </div>
+</template>
