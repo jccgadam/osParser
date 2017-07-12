@@ -41,6 +41,7 @@ var parseSalesOrder = function(dataBeforeParse){
                          })
   data = data.replace(headerRow1String,headerRow1String+'\r\n'+headerRow2String);
   // createDownload(data);
+  console.log(data)
   saveFile(data)
   Session.set('dataBeforeParse','');
 }
@@ -80,12 +81,12 @@ Template.upload.events({
                   var today = new Date();
                   var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
                   var totalLength = item.length;
-                  orderData.push(['SO','','10','WellSmith','WellSmith',orderInfo[0],orderInfo[2],orderInfo[3],orderInfo[4],orderInfo[5],orderInfo[6],'UNITED STATES',orderInfo[0],orderInfo[2],orderInfo[3],orderInfo[4],orderInfo[5],orderInfo[6],'USPS','None','30','','',formatDate,'Steve Monnier','Prepaid & Billed','COD','Origin','','None','','Sunnyvale',formatDate,'','','','','','','']);
+                  orderData.push(['SO','','10','WellSmith','WellSmith',orderInfo[0],orderInfo[2],orderInfo[3],orderInfo[4],orderInfo[5],'UNITED STATES',orderInfo[0],orderInfo[2],orderInfo[3],orderInfo[4],orderInfo[5],'UNITED STATES','USPS','None','30','','',formatDate,'steve.monnier@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','','Sunnyvale',formatDate,'','','','','','','']);
                   for(var i=6;i<totalLength;i++){
                     var itemNo = i;
                     if(itemNo===6&&item[i]){
                       orderData.push(
-                        ['Item','10','Control Solution','Control Solution for test strips, BG Parts',item[i],'ea','10.00','FALSE','NON','','None',formatDate,'FALSE','TRUE']
+                        ['Item','10','Control Solution','Control Solution for test strips, BG Parts',item[i],'ea','10.00','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                       )
                     }
                   }
