@@ -1,0 +1,16 @@
+
+
+<template name='allCustomers'>
+  <div class='row'>
+    <div class='col-lg-7 page-header'>
+      <h2 style="padding-left:15px;margin-top:0px"> All Users Table:</h2>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-lg-1'>
+    </div>
+    <div class='col-lg-10'>
+      {{> reactiveTable collection=doc settings = setting}}
+    </div>
+  </div>
+</template>

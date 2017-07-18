@@ -1,11 +1,11 @@
-<head>
+<!-- <head>
   <title>osParser</title>
 </head>
 
 <body>
   {{> hello}}
   {{> upload}}
-</body>
+</body> -->
 
 <template name="hello">
   <div class='row'>
@@ -13,6 +13,7 @@
       <h2 style="margin:15px">Subscription Order Parser</h2>
     </div>
   </div>
+  {{> upload}}
 </template>
 
 <template name="upload">
@@ -26,6 +27,16 @@
      "Please name your download file"
      <input required id='fileName'/>
      <input type='file' id='uploadFile' disabled/>
+   </div>
+   <div class='col-lg-3'>
+     {{>quickForm id='insertProductInfo' collection='productInfo' type='insert'}}
+   </div>
+ </div>
+ <div class='row'>
+   <div class='col-lg-2'>
+   </div>
+   <div class='col-lg-8'>
+    {{>quickForm id='updateProductInfo' collection='productInfo' doc=doc type="update"}}
    </div>
  </div>
 </template>

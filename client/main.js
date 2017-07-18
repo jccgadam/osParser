@@ -54,11 +54,15 @@ Tracker.autorun(function() {
 
 Template.upload.onCreated(function(){
   Session.set('dataBeforeParse',[]);
+  Meteor.subscribe('allProducts');
 })
 
 Template.upload.helpers({
   orderData:function(){
     return Session.get('dataBeforeParse');
+  },
+  doc:function(){
+    return productInfo.find().fetch();
   }
 })
 Template.upload.events({

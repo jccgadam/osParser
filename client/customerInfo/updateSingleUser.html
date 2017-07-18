@@ -1,0 +1,72 @@
+<template name='updateSingleUser'>
+
+{{#autoForm collection='customerInfo' doc=this type='update'}}
+<div class='row' style="margin-top:40px">
+    <div class='col-lg-2'>
+    </div>
+    <div class='col-lg-8' style="padding:15px;border:solid 1px">
+      <div class='row'>
+        <div class='col-lg-6'>
+            {{>afQuickField name='customerName' label='Customer Name'}}
+        </div>
+        <div class='col-lg-6'>
+            {{>afQuickField name='business'}}
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-lg-12'>
+          {{>afQuickField name='address.street'}}
+        </div>
+        <div class='col-lg-6'>
+          {{>afQuickField name='address.city'}}
+        </div>
+        <div class='col-lg-6'>
+          {{>afQuickField name='address.state'}}
+        </div>
+        <div class='col-lg-6'>
+          {{>afQuickField name='address.country' placeholder='if blank United State'}}
+        </div>
+        <div class='col-lg-6'>
+          {{>afQuickField name='address.zip'}}
+        </div>
+        <div class='col-lg-12'>
+          <div class='row'>
+            <div class='col-lg-12'>
+            <div class='row'>
+              <div class='col-lg-5'>
+                <label class="control-label">Product Name</label>
+                <button type="button" class="btn btn-primary autoform-add-item"   data-autoform-field="refillProducts">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </button>
+              </div>
+              <div class='col-lg-6'>
+                <label class="control-label">Quantity</label>
+              </div>
+            </div>
+            {{# afEachArrayItem name="refillProducts"}}
+              <div class='row'>
+                <div class='col-lg-5'>
+                  {{>afQuickField name=this.current.productName label=false}}
+                </div>
+                <div class='col-lg-5'>
+                  {{>afQuickField name=this.current.quantity label=false}}
+                </div>
+                <div class='col-lg-2' style="text-align:center">
+                  <button type="button" class="btn btn-primary autoform-remove-item"   data-autoform-field="refillProducts">
+                    <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+                </div>
+              </div>
+            {{/afEachArrayItem}}
+            </div>
+          </div>
+          <!-- {{>afQuickField name='refillProducts'}} -->
+        </div>
+      </div>
+    </div>
+    <div class='col-lg-12' style="text-align:center;margin-top:20px">
+      <button type='submit' class='btn btn-primary'>Submit</button>
+    </div>
+</div>
+{{/autoForm}}
+</template>
