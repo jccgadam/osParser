@@ -43,7 +43,7 @@ var parseSalesOrder = function(dataBeforeParse){
   // createDownload(data);
   console.log(data)
   saveFile(data)
-  Session.set('dataBeforeParse','');
+  // Session.set('dataBeforeParse','');
 }
 
 Tracker.autorun(function() {

@@ -4,9 +4,16 @@ html {
     height: 100%;
 }
 
+header{
+  display: flex;
+}
+
 body {
     height: 100%;
     overflow: auto;
+}
+h1 ,h2 ,h3 ,h4 ,h5 ,h6 {
+  font-family: serif;
 }
 
 /* Themes */
@@ -45,7 +52,7 @@ body {
 header {
   max-width: 100%;
   height: 80px;
-  padding: 5px;
+  padding: 0px;
   background: cornflowerblue;
 }
 
@@ -53,12 +60,12 @@ header {
   float: right;
   font-family: 'Monda', sans-serif;
   font-size: 1.75em;
-  margin-right:10%;
   font-weight: 400;
 }
 
 nav {
   margin-left: 8%;
+  width: 70%
 }
 
 .nav-bar {
@@ -68,20 +75,41 @@ nav {
   display: flex;
   -webkit-transition: max-height 0.5s;
   transition: max-height 0.5s;
+  height:100%
 }
 .nav-bar li {
   display: flex;
   align-items: center;
-  padding-left: 5px;
-  padding-right: 5px;
-  height:70px
+  padding-left: 15px;
+  padding-right: 15px;
+  height:100%
+}
+
+ li.firstLi{
+  border-left:solid 1px;
+}
+ li.liItem:hover > a{
+  transform: scale(1.2);
+  text-decoration: none;
+ }
+ li.liItem > a {
+   color:black;
+ }
+
+ li.middleli{
+  border-left:solid 1px;
+  border-right:solid 1px;
+ }
+
+ li.lastLi{
+  border-right:solid 1px;
 }
 
 .nav-bar a {
   padding: 5px;
   text-transform: uppercase;
   font-family:serif;
-  font-size:16px;
+  font-size:20px;
   letter-spacing: 1px;
 }
 

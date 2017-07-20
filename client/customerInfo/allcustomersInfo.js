@@ -15,6 +15,16 @@ Template.allCustomers.helpers({
                 key:'address.zip',label:'Zipcode',cellClass:'center',headerClass:'center'
               },
               {
+                key:'refillProducts',label:'Item Count',cellClass:'center',headerClass:'center',fn:function(value){
+                  return value.length;
+                }
+              },
+              {
+                key:'repunishDate',label:'Repunish Date',cellClass:'center',headerClass:'center',fn:function(value){
+                  return moment(value).format('MM-DD-YYYY');
+                }
+              },
+              {
                 key:'status',label:'Status',cellClass:'center',headerClass:'center',
                   fn:function(value,object){
                     var _id = object._id;

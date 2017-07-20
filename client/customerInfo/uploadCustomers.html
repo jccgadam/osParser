@@ -1,9 +1,22 @@
 
 <template name='uploadCustomers'>
-  <div style='margin:20px'>
-    <strong>Choose csv file to upoad new customers:</strong>
-    <input type='file' id='uploadCustomers'/>
-    <input id='business'/>
+  <div class='row'>
+    <div class='col-lg-1'>
+    </div>
+    <div class="col-lg-3 form-group" required style="margin-top:20px">
+      <label class="control-label">Company Name</label>
+      <select id='companySel' required=""  autocomplete="off" class="form-control">
+        <option value="">(Select One)</option>
+        <option value="WellSmith">WellSmith</option>
+        <option value="another">another</option>
+      </select>
+      <span class="help-block"></span>
+    </div>
+    <div class='col-lg-3 form-group' style='margin:20px'>
+      <label class='control-label'>Choose csv file to upoad new customers:</label>
+      <input type='file' id='uploadCustomers' accept=".csv" {{disabled}}/>
+      <input id='business'/>
+    </div>
   </div>
   {{#if doc}}
   <div class='row'>
@@ -18,6 +31,7 @@
     </div>
     <div class='col-lg-6' style="text-align:center;">
       <button class='btn btn-primary confirmAndUpload'>Confirm All Customers</button>
+      <button class='btn btn-danger resetUsers'>Reset</button>
     </div>
   </div>
   {{/if}}

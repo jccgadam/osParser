@@ -32,3 +32,6 @@ iron:router
 aslagle:reactive-table
 underscore
 mizzao:bootboxjs
+msavin:mongol
+momentjs:moment
+percolate:synced-cron
