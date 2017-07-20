@@ -2,49 +2,49 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
-var createDownload = function(csvString){
-  var blob = new Blob([csvString]);
-        var a = window.document.createElement("a");
-        a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
-        fileName = $('#fileName').val();
-        a.download = fileName+".csv";
-        document.body.appendChild(a);
-        a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
-        document.body.removeChild(a);
+// var createDownload = function(csvString){
+//   var blob = new Blob([csvString]);
+//         var a = window.document.createElement("a");
+//         a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+//         fileName = $('#fileName').val();
+//         a.download = fileName+".csv";
+//         document.body.appendChild(a);
+//         a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+//         document.body.removeChild(a);
+//
+//   }
+  // var saveFile = function(data){
+  //     var blob = new Blob([data]);
+  //     var file = new File([blob],'dummyname')
+  //     var fsFile = new FS.File(file);
+  //     fsFile.name('test.csv');
+  //     // fsFile.size = file.size;
+  //     salesOrders.insert(fsFile,function(error,res){
+  //       if(error){
+  //         console.log(error)
+  //       }
+  //       else{
+  //         alert('inserted')
+  //       }
+  //     })
+  // }
 
-  }
-  var saveFile = function(data){
-      var blob = new Blob([data]);
-      var file = new File([blob],'dummyname')
-      var fsFile = new FS.File(file);
-      fsFile.name('test.csv');
-      // fsFile.size = file.size;
-      salesOrders.insert(fsFile,function(error,res){
-        if(error){
-          console.log(error)
-        }
-        else{
-          alert('inserted')
-        }
-      })
-  }
 
-
-var parseSalesOrder = function(dataBeforeParse){
-  headerRow1=["Flag", "SONum", "Status", "CustomerName", "CustomerContact", "BillToName", "BillToAddress", "BillToCity", "BillToState", "BillToZip", "BillToCountry", "ShipToName", "ShipToAddress", "ShipToCity", "ShipToState", "ShipToZip", "ShipToCountry", "CarrierName", "TaxRateName", "PriorityId", "PONum", "VendorPONum", "Date", "Salesman", "ShippingTerms", "PaymentTerms", "FOB", "Note", "QuickBooksClassName", "LocationGroupName", "FulfillmentDate", "URL", "CarrierService", "DateExpired", "Phone", "Email", "CF-Custom", "CF-Commerce Channel"]
-  headerRow1String = headerRow1.toString();
-  headerRow2=["Flag", "SOItemTypeID", "ProductNumber", "ProductDescription", "ProductQuantity", "UOM", "ProductPrice", "Taxable", "TaxCode", "Note", "QuickBooksClassName", "FulfillmentDate", "ShowItem", "KitItem", "RevisionLevel"];
-  headerRow2String = headerRow2.toString();
-  var data = Papa.unparse({
-                           fields:headerRow1,
-                           data:dataBeforeParse
-                         })
-  data = data.replace(headerRow1String,headerRow1String+'\r\n'+headerRow2String);
-  // createDownload(data);
-  console.log(data)
-  saveFile(data)
-  // Session.set('dataBeforeParse','');
-}
+// var parseSalesOrder = function(dataBeforeParse){
+//   headerRow1=["Flag", "SONum", "Status", "CustomerName", "CustomerContact", "BillToName", "BillToAddress", "BillToCity", "BillToState", "BillToZip", "BillToCountry", "ShipToName", "ShipToAddress", "ShipToCity", "ShipToState", "ShipToZip", "ShipToCountry", "CarrierName", "TaxRateName", "PriorityId", "PONum", "VendorPONum", "Date", "Salesman", "ShippingTerms", "PaymentTerms", "FOB", "Note", "QuickBooksClassName", "LocationGroupName", "FulfillmentDate", "URL", "CarrierService", "DateExpired", "Phone", "Email", "CF-Custom", "CF-Commerce Channel"]
+//   headerRow1String = headerRow1.toString();
+//   headerRow2=["Flag", "SOItemTypeID", "ProductNumber", "ProductDescription", "ProductQuantity", "UOM", "ProductPrice", "Taxable", "TaxCode", "Note", "QuickBooksClassName", "FulfillmentDate", "ShowItem", "KitItem", "RevisionLevel"];
+//   headerRow2String = headerRow2.toString();
+//   var data = Papa.unparse({
+//                            fields:headerRow1,
+//                            data:dataBeforeParse
+//                          })
+//   data = data.replace(headerRow1String,headerRow1String+'\r\n'+headerRow2String);
+//   // createDownload(data);
+//   console.log(data)
+//   saveFile(data)
+//   // Session.set('dataBeforeParse','');
+// }
 
 Tracker.autorun(function() {
     var sessionVal = Session.get("dataBeforeParse");

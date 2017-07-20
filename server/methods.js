@@ -86,13 +86,11 @@ Meteor.methods({
 Meteor.methods({
   'updateNextRepunishDate':function(res){
     if(res){
-      console.log(res.length)
       for(var i=0;i<res.length;i++)
       {
         var v = res[i];
         var customerDoc = customerInfo.findOne({'_id':v});
         var nextrepunishDate = moment(customerDoc.repunishDate).add(1 ,'week').toDate();
-        console.log(nextrepunishDate);
         customerInfo.update({'_id':v},{$set:{repunishDate:nextrepunishDate}});
       }
     }
