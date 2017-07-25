@@ -95,6 +95,34 @@ nav {
  li.liItem > a {
    color:black;
  }
+ .topDropDown{
+    z-index:100
+ }
+
+ .dropDownLi{
+   height:80px !important;
+ }
+ .dropDownLi{
+   height:80px;
+   z-index: 200;
+   background-color: cornflowerblue;
+   align-items: center;
+   justify-content: center;
+   text-decoration: none;
+   color:black;
+   overflow: visible;
+ }
+ .dropDownLi:hover > a {
+   transform: scale(1.1);
+ }
+ .dropDownLi > a {
+   text-decoration: none;
+   color:black;
+ }
+ .page-header{
+   z-index: -1 !important;
+ }
+
 
  li.middleli{
   border-left:solid 1px;

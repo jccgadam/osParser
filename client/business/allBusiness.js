@@ -13,7 +13,10 @@ Template.allBusiness.helpers({
         },
         {
           key:'productInfo',label:'Products Count',cellClass:'center',headerClass:'center',fn:function(value){
-            return value.length;
+            if(value)
+              return value.length;
+
+              else return 0;
           }
         },
         {

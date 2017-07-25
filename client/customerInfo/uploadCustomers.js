@@ -46,7 +46,10 @@ var insertCustomerInfo = function(item){
 }
 
 var checkAndInsertCustomer = function(item,length){
+  console.log('item',item);
+  console.log('length',length);
   if(index>=length){
+    console.log(index)
     return false;
   }
   index++;
@@ -56,7 +59,7 @@ var checkAndInsertCustomer = function(item,length){
       var customerInfo = res;
       var resString ='';
       for(var i=0;i<res.length;i++){
-        resString = resString+'Customer Name:'+res[i].customerName+'@'+res[i].address.zip+'<br>';
+        resString = resString+'Customer Name:'+res[i].customerName+'@'+res[i].business+'<br>';
       }
       bootbox.confirm({
         message: "Duplicate Customer name found. Do you still want to add this new customer?<br>"+resString,
@@ -73,7 +76,6 @@ var checkAndInsertCustomer = function(item,length){
         callback: function (result) {
             if(result){
               //if still add duplicate customer
-
                 insertCustomerInfo(item);
                 checkAndInsertCustomer(Session.get('insertData')[index],length);
             }
@@ -114,6 +116,9 @@ Template.uploadCustomers.onCreated(function(){
         Session.set('insertData',[]);
         Session.set('companySel','');
         Session.set('totalCount',0);
+        $('#uploadCustomers').val('');
+        $('#companySel').find('option:first').attr('selected', 'selected');
+        index=0;
       }
   });
 
@@ -127,6 +132,11 @@ Template.uploadCustomers.helpers({
     if(doc){
       return doc;
     }
+  },
+  businessOpt:function(){
+    var companyOpts = companyInfo.find().fetch();
+    console.log(companyOpts)
+    return companyOpts;
   },
   disabled:function(){
     var business = Session.get('business');
@@ -198,8 +208,10 @@ Template.uploadCustomers.events({
               },
               callback:function(res){
                     if(res){
+                      console.log('called');
                       var insertData = Session.get('insertData');
-                      checkAndInsertCustomer(insertData[index],insertData.length);
+                      console.log('insertData',insertData);
+                      checkAndInsertCustomer(insertData[0],insertData.length);
                     }
                 }
               })

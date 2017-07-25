@@ -7,15 +7,15 @@
       <label class="control-label">Company Name</label>
       <select id='companySel' required=""  autocomplete="off" class="form-control">
         <option value="">(Select One)</option>
-        <option value="WellSmith">WellSmith</option>
-        <option value="another">another</option>
+        {{#each businessOpt}}
+          <option value={{companyName}}>{{companyName}}</option>
+        {{/each}}
       </select>
       <span class="help-block"></span>
     </div>
     <div class='col-lg-3 form-group' style='margin:20px'>
       <label class='control-label'>Choose csv file to upoad new customers:</label>
       <input type='file' id='uploadCustomers' accept=".csv" {{disabled}}/>
-      <input id='business'/>
     </div>
   </div>
   {{#if doc}}

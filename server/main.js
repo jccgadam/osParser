@@ -5,7 +5,9 @@ Meteor.startup(() => {
   name: 'Export sales orders to folder',
   schedule: function(parser) {
     // parser is a later.parse object
-      return parser.text('every 2 mins');
+    // export all orders need to be shipped within before this week.
+
+      return parser.text('every Monday at 4 A.M.');
   },
   job: function() {
     Meteor.call('saveFile',function(error,res){

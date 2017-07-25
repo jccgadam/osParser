@@ -1,12 +1,39 @@
 <body>
 <header>
+    {{>header}}
+</header>
+</body>
+
+<template name='header'>
   <nav>
     <ul class="nav-bar">
       <li class='firstLi liItem'><a href="/">Home</a></li>
       <li class='middleli liItem'><a href="/uploadCustomers">Import</a></li>
-      <!-- <li class='lastLi liItem'><a href="/allBusiness">Company</a></li> -->
+      <!-- <li class='lastLi liItem'>
+        <a href="/allBusiness">Business</a>
+        <ul class=''>
+          <li class='liItem'>
+            some more option
+          </li>
+        </ul>
+      </li> -->
+      <ul class='topDropDown' style="padding-left:0px">
+        <li class='dropDownLi' style="border-right:solid 1px">
+          <a>Business</a>
+        </li>
+        <ul class='menuDropDown' style="padding-left:0px;display:none">
+        <!-- <li class='dropDownLi'>
+          <a>Business</a>
+        </li> -->
+        <li class='dropDownLi ' >
+          <a href='/insertBusiness'>Insert Business</a>
+        </li>
+        <li class='dropDownLi' >
+          <a href='/allBusiness'>All Business</a>
+        </li>
+        </ul>
+      </ul>
     </ul>
   </nav>
   <h1 class="logo">Subscription Module</h1>
-</header>
-</body>
+</template>

@@ -55,7 +55,8 @@ Meteor.methods({
   saveFile: function() {
     var endofWeek = moment().endOf('week').toDate();
     var today = moment(new Date()).format('MM-DD-YY');
-    var selectedUsers = customerInfo.find({repunishDate:{$lt:endofWeek}}).fetch();
+    // fetch all users that need a shipment before this week
+    var selectedUsers = customerInfo.find({repunishDate:{$lt:endofWeek},status:true}).fetch();
     if(selectedUsers.length)
     {
       headerRow1=["Flag", "SONum", "Status", "CustomerName", "CustomerContact", "BillToName", "BillToAddress", "BillToCity", "BillToState", "BillToZip", "BillToCountry", "ShipToName", "ShipToAddress", "ShipToCity", "ShipToState", "ShipToZip", "ShipToCountry", "CarrierName", "TaxRateName", "PriorityId", "PONum", "VendorPONum", "Date", "Salesman", "ShippingTerms", "PaymentTerms", "FOB", "Note", "QuickBooksClassName", "LocationGroupName", "FulfillmentDate", "URL", "CarrierService", "DateExpired", "Phone", "Email", "CF-Custom", "CF-Commerce Channel"]
@@ -90,7 +91,7 @@ Meteor.methods({
       {
         var v = res[i];
         var customerDoc = customerInfo.findOne({'_id':v});
-        var nextrepunishDate = moment(customerDoc.repunishDate).add(1 ,'week').toDate();
+        var nextrepunishDate = moment(customerDoc.repunishDate).add(3 ,'month').toDate();
         customerInfo.update({'_id':v},{$set:{repunishDate:nextrepunishDate}});
       }
     }
