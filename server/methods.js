@@ -91,7 +91,7 @@ Meteor.methods({
       {
         var v = res[i];
         var customerDoc = customerInfo.findOne({'_id':v});
-        var nextrepunishDate = moment(customerDoc.repunishDate).add(3 ,'month').toDate();
+        var nextrepunishDate = moment(customerDoc.repunishDate).add(1 ,'month').toDate();
         customerInfo.update({'_id':v},{$set:{repunishDate:nextrepunishDate}});
       }
     }
