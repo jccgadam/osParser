@@ -6,7 +6,7 @@ Meteor.startup(() => {
   schedule: function(parser) {
     // parser is a later.parse object
     // export all orders need to be shipped within before this week.
-      return parser.text('on Monday at 6:00am ');
+      return parser.text('every 5 min');
       // return parser.text('every 5 min ');
   },
   job: function() {
