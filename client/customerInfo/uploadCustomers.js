@@ -240,42 +240,42 @@ Template.uploadCustomers.events({
               orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo[1],orderInfo[3]+','+orderInfo[4],orderInfo[5],orderInfo[6],orderInfo[7],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
               for(var i=8;i<totalLength;i++){
                 var itemNo = i;
-                if(itemNo===9&&item[i]){
+                if(itemNo===8&&item[i]){
                   orderData.push(
                     ['Item','10','550BT Track','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===10&&item[i]){
+                if(itemNo===9&&item[i]){
                   orderData.push(
                     ['Item','80','550BT-XL-KIT Track','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===11&&item[i]){
+                if(itemNo===10&&item[i]){
                   orderData.push(
                     ['Item','10','PO3M Air','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===12&&item[i]){
+                if(itemNo===11&&item[i]){
                   orderData.push(
                     ['Item','10','BG5 Smart','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===13&&item[i]){
+                if(itemNo===12&&item[i]){
                   orderData.push(
                     ['Item','10','Test Strips','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===14&&item[i]){
+                if(itemNo===13&&item[i]){
                   orderData.push(
                     ['Item','10','Lancets','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===15&&item[i]){
+                if(itemNo===14&&item[i]){
                   orderData.push(
                     ['Item','10','Lancing Device','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===16&&item[i]){
+                if(itemNo===15&&item[i]){
                   orderData.push(
                     ['Item','10','Control Solution','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
