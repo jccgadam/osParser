@@ -1,3 +1,37 @@
+var headerRow1= ["Flag", "SONum", "Status", "CustomerName", "CustomerContact", "BillToName", "BillToAddress", "BillToCity", "BillToState", "BillToZip", "BillToCountry", "ShipToName", "ShipToAddress", "ShipToCity", "ShipToState", "ShipToZip", "ShipToCountry", "CarrierName", "TaxRateName", "PriorityId", "PONum", "VendorPONum", "Date", "Salesman", "ShippingTerms", "PaymentTerms", "FOB", "Note", "QuickBooksClassName", "LocationGroupName", "FulfillmentDate", "URL", "CarrierService", "DateExpired", "Phone", "Email", "CF-Custom", "CF-Commerce Channel"]
+var headerRow1String = headerRow1.toString();
+var headerRow2= ["Flag", "SOItemTypeID", "ProductNumber", "ProductDescription", "ProductQuantity", "UOM", "ProductPrice", "Taxable", "TaxCode", "Note", "QuickBooksClassName", "FulfillmentDate", "ShowItem", "KitItem", "RevisionLevel"];
+var headerRow2String = headerRow2.toString();
+var billingInfo = {
+  BillToName:'Provectus Health',
+  BillToZip:'30067',
+  BillToCity:'Marietta',
+  BillToState:'GA',
+  BillToAddress:'1640 Powers Ferry Rd.Building 26, Suite 250',
+  BillToCountry:'US'
+}
+function dataParser(dataBeforeParse){
+  var orderData = [];
+  orderData.push(headerRow1);
+  orderData.push(headerRow2);
+  _.each(dataBeforeParse,function(item){
+      var orderInfo = item;
+      var today = orderInfo.repunishDate||new Date();
+      var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+      var refillProducts = orderInfo.refillProducts;
+      orderData.push(['SO','','10',orderInfo.business,orderInfo.business,orderInfo.customerName,orderInfo.address.street,orderInfo.address.city,orderInfo.address.state,orderInfo.address.zip,'UNITED STATES',orderInfo.customerName,orderInfo.address.street,orderInfo.address.city,orderInfo.address.state,orderInfo.address.zip,'UNITED STATES','USPS','None','30','','',formatDate,'steve.monnier@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','',orderInfo.phone,'','','']);
+      for(var i=0;i<totalLength;i++){
+        var refillProduct =refillProducts[i];
+          orderData.push(
+            ['Item','10',refillProduct.productName,'',refillProduct.quantity,'ea','','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+          )
+      }
+  })
+  console.log(orderData);
+  return orderData;
+}
+
+
 var index=0;
 var insertCustomerInfo = function(item){
   var business = Session.get('business');
@@ -46,10 +80,7 @@ var insertCustomerInfo = function(item){
 }
 
 var checkAndInsertCustomer = function(item,length){
-  console.log('item',item);
-  console.log('length',length);
   if(index>=length){
-    console.log(index)
     return false;
   }
   index++;
@@ -106,7 +137,7 @@ Template.uploadCustomers.onCreated(function(){
   Session.set('insertData',[]);
   Session.set('companySel','');
   Session.set('totalCount',0);
-
+  Session.set('orderData',[]);
   Tracker.autorun(() => {
 
       var totalUsers = Session.get('insertData').length;
@@ -177,15 +208,145 @@ Template.uploadCustomers.helpers({
 
 
 Template.uploadCustomers.events({
-  'change #uploadCustomers':function(e,t){
-    var customerData = Papa.parse(e.target.files[0],{
+  // 'change #uploadCustomers':function(e,t){
+  //   var customerData = Papa.parse(e.target.files[0],{
+  //     complete:function(res){
+  //         var insertData = res.data;
+  //         Session.set('insertData',res.data);
+  //       }
+  //     })
+  // },
 
-      complete:function(res){
-          var insertData = res.data;
-          Session.set('insertData',res.data);
+
+  //<!-----case for ProvectusiHealthOrders---->
+
+  'change #uploadCustomers':function(e,t){
+      var orderData=[];
+      var config = {
+	                 header: true,
+                   encoding: "utf8",
+                 };
+      Papa.parse(e.target.files[0],{
+        complete:function(res){
+          var dataBeforeParse = res.data;
+          // orderData[0] = headerRow1;
+          // orderData[1] = headerRow2;
+          // Session.set('insertData',dataBeforeParse);
+          _.each(dataBeforeParse.slice(1,dataBeforeParse.length),function(item){
+              var orderInfo = item;
+              var today = new Date();
+              var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+              var totalLength = item.length;
+              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo[1],orderInfo[3]+','+orderInfo[4],orderInfo[5],orderInfo[6],orderInfo[7],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
+              for(var i=8;i<totalLength;i++){
+                var itemNo = i;
+                if(itemNo===9&&item[i]){
+                  orderData.push(
+                    ['Item','10','550BT Track','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===10&&item[i]){
+                  orderData.push(
+                    ['Item','80','550BT-XL-KIT Track','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===11&&item[i]){
+                  orderData.push(
+                    ['Item','10','PO3M Air','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===12&&item[i]){
+                  orderData.push(
+                    ['Item','10','BG5 Smart','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===13&&item[i]){
+                  orderData.push(
+                    ['Item','10','Test Strips','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===14&&item[i]){
+                  orderData.push(
+                    ['Item','10','Lancets','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===15&&item[i]){
+                  orderData.push(
+                    ['Item','10','Lancing Device','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+                if(itemNo===16&&item[i]){
+                  orderData.push(
+                    ['Item','10','Control Solution','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                  )
+                }
+              }
+              // var csvString = JSON.stringify(orderData);
+              // console.log(csvString);
+
+          })
+          var csvString = Papa.unparse(orderData);
+          csvString = headerRow1String+'\n'+headerRow2String+'\n'+csvString;
+
+         var blob = new Blob([csvString]);
+         if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+             window.navigator.msSaveBlob(blob, "filename.csv");
+         else
+         {
+             var a = window.document.createElement("a");
+             a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+             a.download = "filename.csv";
+             document.body.appendChild(a);
+             a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+             document.body.removeChild(a);
+         }
+
         }
       })
+
   },
+  // <!-----case for ProvectusiHealthOrders---->
+
+  // 'change #uploadCustomers':function(e,t){
+  //     var orderData=[];
+  //     var config = {
+	//                  header: true,
+  //                  encoding: "utf8",
+  //                };
+  //     Papa.parse(e.target.files[0],{
+  //       complete:function(res){
+  //         var dataBeforeParse = res.data;
+  //         dataBeforeParse = dataBeforeParse.slice(1,dataBeforeParse.length);
+  //         console.log(dataBeforeParse);
+  //         _.each(dataBeforeParse,function(item){
+  //           console.log(item);
+  //             var orderInfo = item;
+  //             var today = new Date();
+  //             var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+  //             var totalLength = item.length;
+  //             orderData.push(['SO','','20','Woot.com','','Woot.com','4121 International Pkwy','Carrollton','TX','75007','UNITED STATES',orderInfo[3],orderInfo[4]+','+orderInfo[5],orderInfo[6],orderInfo[7],orderInfo[8],'UNITED STATES',orderInfo[16],'None','30',orderInfo[2],'',formatDate,'Wade.shu@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'',orderInfo[17],orderInfo[10],'','','','']);
+  //             orderData.push(['Item','10','HS4 Lite','',orderInfo[14],'ea','46.49','FALSE','NON','','None',formatDate,'FALSE','FALSE']);
+  //         })
+  //         var csvString = Papa.unparse(orderData);
+  //         csvString = headerRow1String+'\n'+headerRow2String+'\n'+csvString;
+  //
+  //        var blob = new Blob([csvString]);
+  //        if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+  //            window.navigator.msSaveBlob(blob, "filename.csv");
+  //        else
+  //        {
+  //            var a = window.document.createElement("a");
+  //            a.href = window.URL.createObjectURL(blob, {type: "text/plain"});
+  //            a.download = "filename.csv";
+  //            document.body.appendChild(a);
+  //            a.click();  // IE: "Access is denied"; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+  //            document.body.removeChild(a);
+  //        }
+  //
+  //       }
+  //     })
+  //
+  // },
   'change #companySel':function(e,t){
     e.preventDefault();
     var opt = $(e.target).find('option:selected').val();
