@@ -227,60 +227,59 @@ Template.uploadCustomers.events({
                    encoding: "utf8",
                  };
       Papa.parse(e.target.files[0],{
+        header:true,
         complete:function(res){
           var dataBeforeParse = res.data;
           // orderData[0] = headerRow1;
           // orderData[1] = headerRow2;
           // Session.set('insertData',dataBeforeParse);
-          _.each(dataBeforeParse.slice(1,dataBeforeParse.length),function(item){
+          _.each(dataBeforeParse,function(item){
               var orderInfo = item;
               var today = new Date();
               var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
               var totalLength = item.length;
-              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo[1],orderInfo[3]+','+orderInfo[4],orderInfo[5],orderInfo[6],orderInfo[7],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
-              for(var i=8;i<totalLength;i++){
-                var itemNo = i;
-                if(itemNo===8&&item[i]){
+              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
+                if(item['BPE-S']||item['BPE-M']){
                   orderData.push(
-                    ['Item','10','550BT Track','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','550BT Track','',item['BPE-S'] ? item['BPE-S'] : item['BPE-M'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===9&&item[i]){
+                if(item['BPE-L']){
                   orderData.push(
-                    ['Item','80','550BT-XL-KIT Track','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','80','550BT-XL-KIT Track','',item['BPE-L'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===10&&item[i]){
+                if(item['PO3']){
                   orderData.push(
-                    ['Item','10','PO3M Air','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','PO3M Air','',item['PO3'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===11&&item[i]){
+                if(item['BG5']){
                   orderData.push(
-                    ['Item','10','BG5 Smart','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','BG5 Smart','',item['BG5'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===12&&item[i]){
+                if(item['STR-50']){
                   orderData.push(
-                    ['Item','10','Test Strips','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Test Strips','',item['STR-50'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===13&&item[i]){
+                if(item['BG-LAN']){
                   orderData.push(
-                    ['Item','10','Lancets','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Lancets','',item['BG-LAN'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===14&&item[i]){
+                if(item['LANCING DEVICE']){
                   orderData.push(
-                    ['Item','10','Lancing Device','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Lancing Device','',item['LANCING DEVICE'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(itemNo===15&&item[i]){
+                if(item['Control Solution']){
                   orderData.push(
-                    ['Item','10','Control Solution','',item[i],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Control Solution','',item['Control Solution'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-              }
+
               // var csvString = JSON.stringify(orderData);
               // console.log(csvString);
 
