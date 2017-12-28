@@ -238,7 +238,7 @@ Template.uploadCustomers.events({
               var today = new Date();
               var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
               var totalLength = item.length;
-              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
+              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.Name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
                 if(item['BPE-S']||item['BPE-M']){
                   orderData.push(
                     ['Item','10','550BT Track','',item['BPE-S'] ? item['BPE-S'] : item['BPE-M'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
