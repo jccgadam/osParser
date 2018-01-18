@@ -221,6 +221,10 @@ Template.uploadCustomers.events({
   //<!-----case for ProvectusiHealthOrders---->
 
   'change #uploadCustomers':function(e,t){
+      var fileName = e.target.files[0].name;
+
+      //if file name changes , change here
+      var poNumber = fileName.split('ProvectusiHealthOrder_')[1].split('.csv')[0]
       var orderData=[];
       var config = {
 	                 header: true,
@@ -230,23 +234,22 @@ Template.uploadCustomers.events({
         header:true,
         complete:function(res){
           var dataBeforeParse = res.data;
-          // orderData[0] = headerRow1;
-          // orderData[1] = headerRow2;
-          // Session.set('insertData',dataBeforeParse);
+
           _.each(dataBeforeParse,function(item){
               var orderInfo = item;
               var today = new Date();
               var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
               var totalLength = item.length;
-              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.Name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30','112817','',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
-                if(item['BPE-S']||item['BPE-M']){
+              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.Name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30',poNumber,'',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
+                if(item['BPE-S']||item['BPE-M']||item['BPE-Standard']){
+                  var count = item['BPE-S']||item['BPE-M']||item['BPE-Standard']
                   orderData.push(
-                    ['Item','10','550BT Track','',item['BPE-S'] ? item['BPE-S'] : item['BPE-M'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','550BT Track','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['BPE-L']){
+                if(item['BPE-L']||item['BPE-XL']){
                   orderData.push(
-                    ['Item','80','550BT-XL-KIT Track','',item['BPE-L'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','80','550BT-XL-KIT Track','',item['BPE-L'] ? item['BPE-L'] : item['BPE-XL'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['PO3']){
