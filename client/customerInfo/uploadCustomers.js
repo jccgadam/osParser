@@ -224,7 +224,9 @@ Template.uploadCustomers.events({
       var fileName = e.target.files[0].name;
 
       //if file name changes , change here
-      var poNumber = fileName.split('ProvectusiHealthOrder_')[1].split('.csv')[0]
+      console.log(fileName);
+      var poNumber = fileName.split('ProvectusiHealthOrder_')[1].split('.csv')[0];
+      console.log(poNumber);
       var orderData=[];
       var config = {
 	                 header: true,
@@ -234,22 +236,22 @@ Template.uploadCustomers.events({
         header:true,
         complete:function(res){
           var dataBeforeParse = res.data;
-
           _.each(dataBeforeParse,function(item){
               var orderInfo = item;
               var today = new Date();
               var formatDate = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
               var totalLength = item.length;
-              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.Name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30',poNumber,'',formatDate,'carmina.canezal@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
-                if(item['BPE-S']||item['BPE-M']||item['BPE-Standard']){
-                  var count = item['BPE-S']||item['BPE-M']||item['BPE-Standard']
+              orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.Name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30',poNumber,'',formatDate,'steve.monnier@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
+                if(item['550BT']||item['BPE-S']||item['BPE-M']||item['BPE-Standard']||item['550BTS']||item['BP Track Standard']){
+                  var count = item['550BT']||item['BPE-S']||item['BPE-M']||item['BPE-Standard']||item['550BTS']||item['BP Track Standard']
                   orderData.push(
                     ['Item','10','550BT Track','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['BPE-L']||item['BPE-XL']){
+                if(item['BPE-L']||item['BPE-XL']||item['550BTXL']||item['BP Track XL']||item['550BT-XL']){
+                  let count = item['BPE-L'] || item['BPE-L'] || item['BPE-XL'] || item['550BTXL']||item['']||item['550BT-XL'];
                   orderData.push(
-                    ['Item','80','550BT-XL-KIT Track','',item['BPE-L'] ? item['BPE-L'] : item['BPE-XL'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','80','550BT-XL-KIT Track','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['PO3']){
@@ -257,19 +259,24 @@ Template.uploadCustomers.events({
                     ['Item','10','PO3M Air','',item['PO3'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
+                if(item['Cuff-550BT-S/L']){
+                    orderData.push([
+                        'Item','10','PO3M Air','',item['Cuff-550BT-S/L'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE'
+                    ])
+                }
                 if(item['BG5']){
                   orderData.push(
                     ['Item','10','BG5 Smart','',item['BG5'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['STR-50']){
+                if(item['STR-50']||item['STRP']){
                   orderData.push(
-                    ['Item','10','Test Strips','',item['STR-50'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','BG-STR-1000','',item['STR-50']||item['STRP'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['BG-LAN']){
+                if(item['BG-LAN']||item['LAN']){
                   orderData.push(
-                    ['Item','10','Lancets','',item['BG-LAN'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Lancets','',item['BG-LAN']||item['LAN'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['LANCING DEVICE']){
@@ -277,9 +284,9 @@ Template.uploadCustomers.events({
                     ['Item','10','Lancing Device','',item['LANCING DEVICE'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['Control Solution']){
+                if(item['Control Solution']||item['CTR']|| item['CTR ']){
                   orderData.push(
-                    ['Item','10','Control Solution','',item['Control Solution'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Control Solution','',item['Control Solution']||item['CTR']||item['CTR '],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
 
