@@ -244,47 +244,63 @@ Template.uploadCustomers.events({
               orderData.push(['SO','','20','Provectus Health Strategies','jterry@provectushealth.com','Provectus Health Strategies',billingInfo.BillToAddress,billingInfo.BillToCity,billingInfo.BillToState,billingInfo.BillToZip,'UNITED STATES',orderInfo.Name,orderInfo['Street Address - 1']+','+orderInfo['Street Address - 2'],orderInfo.City,orderInfo.State,orderInfo['Zip code'],'UNITED STATES','USPS','None','30',poNumber,'',formatDate,'steve.monnier@ihealthlabs.com','Prepaid & Billed','COD','Origin','','None','Sunnyvale',formatDate,'','','','','','','']);
                 if(item['550BT']||item['BPE-S']||item['BPE-M']||item['BPE-Standard']||item['550BTS']||item['BP Track Standard']){
                   var count = item['550BT']||item['BPE-S']||item['BPE-M']||item['BPE-Standard']||item['550BTS']||item['BP Track Standard']
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','550BT Track','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['BPE-L']||item['BPE-XL']||item['550BTXL']||item['BP Track XL']||item['550BT-XL']){
                   let count = item['BPE-L'] || item['BPE-L'] || item['BPE-XL'] || item['550BTXL']||item['']||item['550BT-XL'];
+                  if(count!=0)
                   orderData.push(
                     ['Item','80','550BT-XL-KIT Track','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['PO3']){
+                  let count = item['PO3'];
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','PO3M Air','',item['PO3'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['Cuff-550BT-S/L']){
+                  let count = item['Cuff-550BT-S/L'];
+                  if(count!=0)
                     orderData.push([
                         'Item','10','PO3M Air','',item['Cuff-550BT-S/L'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE'
                     ])
                 }
                 if(item['BG5']){
+                  let count = item['BG5'];
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','BG5 Smart','',item['BG5'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['STR-50']||item['STRP']){
+                  let count = item['STR-50']||item['STRP'];
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','BG-STR-1000','',item['STR-50']||item['STRP'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['BG-LAN']||item['LAN']){
+                  let count = item['BG-LAN']||item['LAN'];
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','Lancets','',item['BG-LAN']||item['LAN'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['LANCING DEVICE']){
+                  let count = item['LANCING DEVICE'];
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','Lancing Device','',item['LANCING DEVICE'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['Control Solution']||item['CTR']|| item['CTR ']){
+                  let count = item['Control Solution']||item['CTR']|| item['CTR '];
+                  if(count!=0)
                   orderData.push(
                     ['Item','10','Control Solution','',item['Control Solution']||item['CTR']||item['CTR '],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
