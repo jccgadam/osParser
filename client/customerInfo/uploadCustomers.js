@@ -281,7 +281,7 @@ Template.uploadCustomers.events({
                   let count = item['STR-50']||item['STRP'];
                   if(count!=0)
                   orderData.push(
-                    ['Item','10','BG-STR-1000','',item['STR-50']||item['STRP'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','BG-STR-2003','',item['STR-50']||item['STRP'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['BG-LAN']||item['LAN']){
@@ -291,11 +291,11 @@ Template.uploadCustomers.events({
                     ['Item','10','Lancets','',item['BG-LAN']||item['LAN'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['LANCING DEVICE']){
-                  let count = item['LANCING DEVICE'];
+                if(item['LANCING DEVICE']||item['Lancing Device']){
+                  let count = item['LANCING DEVICE']||item['Lancing Device'];
                   if(count!=0)
                   orderData.push(
-                    ['Item','10','Lancing Device','',item['LANCING DEVICE'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
+                    ['Item','10','Lancing Device','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
                 if(item['Control Solution']||item['CTR']|| item['CTR ']){
