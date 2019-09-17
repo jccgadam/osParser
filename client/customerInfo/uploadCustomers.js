@@ -291,8 +291,8 @@ Template.uploadCustomers.events({
                     ['Item','10','Lancets','',item['BG-LAN']||item['LAN'],'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
                   )
                 }
-                if(item['LANCING DEVICE']||item['Lancing Device']){
-                  let count = item['LANCING DEVICE']||item['Lancing Device'];
+                if(item['LANCING DEVICE']||item['Lancing Device']||item['LAN-DEV']){
+                  let count = item['LANCING DEVICE']||item['Lancing Device']||item['LAN-DEV'];
                   if(count!=0)
                   orderData.push(
                     ['Item','10','Lancing Device','',count,'ea','0.0','FALSE','NON','','None',formatDate,'FALSE','FALSE']
